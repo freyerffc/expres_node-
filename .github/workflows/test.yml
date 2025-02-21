@@ -8,6 +8,9 @@ on:
 jobs:
   decir-hola:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write 
 
     steps:
       - name: Mostrar mensaje
@@ -17,6 +20,15 @@ jobs:
           curl -X POST 'https://webhook.site/892f2749-aba3-44c8-af63-04640edf7a85' \
           -H 'content-type: application/json' \
           -d '{"nombre": "Freddy"}'
+      - name: Checkout reposiytory
+        run: acctions/checkout@v4
+      - name: Logearnos en GHCR
+        run: echo "xvz" | doctor login ghcr.io -u freyerffc --password-stdin
+      - name: Crear imagen
+        run: docker build . -t ghcr.io/freyerffc/express/-image
+      - name: Desplegar
+        run: docker push -t ghcr.io/freyerffc/express-image
+
 
     
 

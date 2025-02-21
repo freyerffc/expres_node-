@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Comando por defecto para ejecutar la aplicación
-CMD ["python", "app.py"]
+CMD ["node", "index"]
